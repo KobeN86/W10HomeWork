@@ -1,24 +1,51 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": { "text": "Cheapest European Cities" },
-  "width": 500,
-  "height": 300,
+  "title": { "text": "CO₂ Emissions Per Country" },
+  "width": 600,
+  "height": 400,
   "data": {
-  "url": "https://raw.githubusercontent.com/KobeN86/3179_Assignment_2/main/Filtered_data.csv"
+    "url": "https://raw.githubusercontent.com/KobeN86/W10HomeWork/refs/heads/main/data/annual-co2-emissions-per-country.csv?token=GHSAT0AAAAAADLRZXKJ3Q7XPMCGVW3IHVF22HAN2TA"
   },
-
-  "mark": "bar",
-  "encoding": {
-    "x": { 
-      "field": "Renewable", 
-      "type": "quantitative",
-      "title": "Daily Cost (USD)"
+  "params": [
+    {
+      "name": "country_selection",
+      "value": ["Australia"],
+      "bind": {
+        "input": "select",
+        "options": [
+          "Australia", "China", "India", "United States", "United Kingdom", "Germany", "Brazil"
+        ],
+        "labels": [
+          "Australia", "China", "India", "USA", "UK", "Germany", "Brazil"
+        ],
+        "name": "Select Countries: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.Year >= 1960" 
     },
-    "y": { 
-      "field": "country", 
+    {
+      "filter": "indexof(country_selection, datum.Entity) >= 0"
+    }
+  ],
+  "mark": "area",
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "temporal",
+      "title": "Year"
+    },
+    "y": {
+      "field": "Annual CO₂ emissions",
+      "type": "quantitative",
+      "title": "CO₂ Emissions (tonnes)"
+    },
+    "color": {
+      "field": "Entity",
       "type": "nominal",
-      "title": "City",
-      "sort": {"field": "daily_cost", "order": "ascending"}
+      "title": "Country"
     }
   }
 }
