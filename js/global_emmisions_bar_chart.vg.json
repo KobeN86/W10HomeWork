@@ -4,7 +4,7 @@
   "width": 600,
   "height": 400,
   "data": {
-    "url": "https://raw.githubusercontent.com/KobeN86/W10HomeWork/refs/heads/main/data/annual-co2-emissions-per-country.csv?token=GHSAT0AAAAAADLRZXKJ3Q7XPMCGVW3IHVF22HAN2TA"
+    "url": "https://raw.githubusercontent.com/KobeN86/W10HomeWork/main/data/annual-co2-emissions-per-country.csv"
   },
   "params": [
     {
@@ -38,7 +38,7 @@
       "title": "Year"
     },
     "y": {
-      "field": "Annual CO₂ emissions",
+      "field": "Emmisions",
       "type": "quantitative",
       "title": "CO₂ Emissions (tonnes)"
     },
