@@ -18,7 +18,7 @@
         "labels": [
           "Australia", "China", "India", "USA", "UK", "Germany", "Brazil"
         ],
-        "name": "Select Countries: "
+        "name": "Select Country: "
       }
     }
   ],
@@ -45,7 +45,13 @@
     "color": {
       "field": "Entity",
       "type": "nominal",
-      "title": "Country"
-    }
+      "title": "Country",
+      "scale": {"scheme": "greens"}
+    },
+    "tooltip": [
+      {"field": "Entity", "type": "nominal", "title": "Country"},
+      {"field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
+      {"field": "Emmisions", "type": "quantitative", "title": "CO₂ Emissions (tonnes)", "format": ",.0f"}
+    ]
   }
 }
