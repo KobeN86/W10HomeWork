@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Proportion of energy from renewable sources (2024)",
+  "title": "Proportion of Energy from Renewable Sources (2000–2024)",
   "width": 1100,
   "height": 600,
   "projection": {"type": "equirectangular"},
@@ -9,10 +9,23 @@
     "background": "white",
     "title": {"fontSize": 22}
   },
+  "params": [
+    {
+      "name": "YearSelection",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2000,
+        "max": 2024,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
   "layer": [
     {
       "data": {"graticule": true},
-      "mark": {"type": "geoshape", "stroke": "#666666", "strokeWidth": 0.5, "fill": null}
+      "mark": {"type": "geoshape", "stroke": "#888", "strokeWidth": 0.5, "fill": null}
     },
     {
       "data": {
@@ -21,32 +34,41 @@
       },
       "transform": [
         {
-          
           "calculate": "datum.properties.NAME == 'Nigeria' || datum.properties.NAME == 'Ghana' || datum.properties.NAME == 'Mali' || datum.properties.NAME == 'Burkina Faso' || datum.properties.NAME == 'Senegal' || datum.properties.NAME == 'Guinea' || datum.properties.NAME == 'Sierra Leone' || datum.properties.NAME == 'Liberia' || datum.properties.NAME == 'Côte d\\'Ivoire' || datum.properties.NAME == 'Togo' || datum.properties.NAME == 'Benin' || datum.properties.NAME == 'Niger' || datum.properties.NAME == 'Gambia' || datum.properties.NAME == 'Guinea-Bissau' || datum.properties.NAME == 'Mauritania' || datum.properties.NAME == 'Cape Verde' ? 'Western Africa (EI)' : datum.properties.NAME == 'Kenya' || datum.properties.NAME == 'Tanzania' || datum.properties.NAME == 'Ethiopia' || datum.properties.NAME == 'Uganda' || datum.properties.NAME == 'Rwanda' || datum.properties.NAME == 'Burundi' || datum.properties.NAME == 'South Sudan' || datum.properties.NAME == 'Somalia' || datum.properties.NAME == 'Djibouti' || datum.properties.NAME == 'Eritrea' || datum.properties.NAME == 'Madagascar' || datum.properties.NAME == 'Mauritius' || datum.properties.NAME == 'Comoros' || datum.properties.NAME == 'Seychelles' ? 'Eastern Africa (EI)' : datum.properties.NAME == 'Democratic Republic of the Congo' || datum.properties.NAME == 'Cameroon' || datum.properties.NAME == 'Central African Republic' || datum.properties.NAME == 'Chad' || datum.properties.NAME == 'Republic of the Congo' || datum.properties.NAME == 'Equatorial Guinea' || datum.properties.NAME == 'Gabon' || datum.properties.NAME == 'São Tomé and Principe' ? 'Middle Africa (EI)' : datum.properties.NAME == 'Angola' || datum.properties.NAME == 'Zambia' || datum.properties.NAME == 'Zimbabwe' || datum.properties.NAME == 'Botswana' || datum.properties.NAME == 'Namibia' || datum.properties.NAME == 'Lesotho' || datum.properties.NAME == 'Eswatini' || datum.properties.NAME == 'Malawi' || datum.properties.NAME == 'Mozambique' ? 'Other Southern Africa (EI)' : datum.properties.NAME == 'Tunisia' || datum.properties.NAME == 'Libya' || datum.properties.NAME == 'Sudan' ? 'Other Northern Africa (EI)' : datum.properties.NAME",
           "as": "lookup_key"
-        },
-        {
-          "calculate": "datum.properties.NAME == 'Nigeria' || datum.properties.NAME == 'Ghana' || datum.properties.NAME == 'Mali' || datum.properties.NAME == 'Burkina Faso' || datum.properties.NAME == 'Senegal' || datum.properties.NAME == 'Guinea' || datum.properties.NAME == 'Sierra Leone' || datum.properties.NAME == 'Liberia' || datum.properties.NAME == 'Côte d\\'Ivoire' || datum.properties.NAME == 'Togo' || datum.properties.NAME == 'Benin' || datum.properties.NAME == 'Niger' || datum.properties.NAME == 'Gambia' || datum.properties.NAME == 'Guinea-Bissau' || datum.properties.NAME == 'Mauritania' || datum.properties.NAME == 'Cape Verde' || datum.properties.NAME == 'Kenya' || datum.properties.NAME == 'Tanzania' || datum.properties.NAME == 'Ethiopia' || datum.properties.NAME == 'Uganda' || datum.properties.NAME == 'Rwanda' || datum.properties.NAME == 'Burundi' || datum.properties.NAME == 'South Sudan' || datum.properties.NAME == 'Somalia' || datum.properties.NAME == 'Djibouti' || datum.properties.NAME == 'Eritrea' || datum.properties.NAME == 'Madagascar' || datum.properties.NAME == 'Mauritius' || datum.properties.NAME == 'Comoros' || datum.properties.NAME == 'Seychelles' || datum.properties.NAME == 'Democratic Republic of the Congo' || datum.properties.NAME == 'Cameroon' || datum.properties.NAME == 'Central African Republic' || datum.properties.NAME == 'Chad' || datum.properties.NAME == 'Republic of the Congo' || datum.properties.NAME == 'Equatorial Guinea' || datum.properties.NAME == 'Gabon' || datum.properties.NAME == 'São Tomé and Principe' || datum.properties.NAME == 'Angola' || datum.properties.NAME == 'Zambia' || datum.properties.NAME == 'Zimbabwe' || datum.properties.NAME == 'Botswana' || datum.properties.NAME == 'Namibia' || datum.properties.NAME == 'Lesotho' || datum.properties.NAME == 'Eswatini' || datum.properties.NAME == 'Malawi' || datum.properties.NAME == 'Mozambique' || datum.properties.NAME == 'Tunisia' || datum.properties.NAME == 'Libya' || datum.properties.NAME == 'Sudan'",
-          "as": "is_regional_data"
         },
         {
           "lookup": "lookup_key",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/KobeN86/3179_Assignment_2/main/Filtered_data.csv"
+              "url": "https://raw.githubusercontent.com/KobeN86/W10HomeWork/refs/heads/main/data/renewable-share-energy.csv",
+              "format": {"type": "csv"}
             },
             "key": "Country",
-            "fields": ["Renewable"]
+            "fields": ["Renewables"]
           },
-          "default": {"Renewable": null}
-        }
+          "as": ["Renewables"]
+        },
+        {
+          "lookup": "lookup_key",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/KobeN86/W10HomeWork/refs/heads/main/data/renewable-share-energy.csv",
+              "format": {"type": "csv"}
+            },
+            "key": "Country",
+            "fields": ["Year"]
+          },
+          "as": ["Year"]
+        },
+        {"filter": "datum.Year == YearSelection"}
       ],
       "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
       "encoding": {
         "color": {
           "condition": {
-            "test": "datum.Renewable != null",
-            "field": "Renewable",
+            "test": "datum.Renewables != null",
+            "field": "Renewables",
             "type": "quantitative",
             "scale": {
               "type": "log",
@@ -54,11 +76,12 @@
             },
             "title": "Renewable Energy (%)"
           },
-          "value": "#cccccc" 
+          "value": "#cccccc"
         },
         "tooltip": [
           {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-          {"field": "Renewable", "type": "quantitative", "format": ".2f", "title": "Renewable %"}
+          {"field": "Year", "type": "ordinal"},
+          {"field": "Renewables", "type": "quantitative", "format": ".2f", "title": "Renewables %"}
         ]
       }
     }
