@@ -46,7 +46,7 @@
       "field": "Entity",
       "type": "nominal",
       "title": "Country",
-      "scale": {"scheme": "greens"}
+      "scale": {"scheme": "darkblue"}
     },
     "tooltip": [
       {"field": "Entity", "type": "nominal", "title": "Country"},
